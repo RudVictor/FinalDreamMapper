@@ -1,0 +1,91 @@
+DREAMMAPPER — XAMPP INSTALLATION GUIDE
+
+1. INSTALL XAMPP
+   - Install XAMPP for Windows.
+   - Open XAMPP Control Panel.
+   - Start Apache.
+   - Start MySQL.
+
+2. COPY PROJECT
+   - Extract the DreamMapper ZIP.
+   - Copy the DreamMapper folder into:
+     C:\xampp\htdocs\
+   - Final path must be:
+     C:\xampp\htdocs\dreammapper\
+
+3. CREATE DATABASE
+   - Open your browser.
+   - Go to http://localhost/phpmyadmin
+   - Click Import.
+   - Select DreamMapper/schema.sql.
+   - Click Import/Go.
+   - The database named `dreammapper` should appear.
+
+4. CHECK DATABASE CONNECTION
+   Open:
+     C:\xampp\htdocs\dreammapper\db.php
+
+   Default XAMPP settings are:
+     host = 127.0.0.1
+     database = dreammapper
+     user = root
+     password = empty
+
+   If your MySQL root account has a password, change `$pass` in db.php.
+
+5. RUN APPLICATION
+   Open:
+     http://localhost/dreammapper/
+
+6. FIRST DEMO
+   - Enter:
+     I want to become a Game Developer in 2 years
+   - Click "Map My Dream".
+   - The application creates a dream, graph nodes, tasks and a notification.
+   - Click roadmap nodes to change their title/status.
+   - Tick tasks to update progress.
+   - Observe Dream Score, Completion and Success Index.
+
+7. IF PAGE IS BLANK
+   - Check Apache is running.
+   - Check MySQL is running.
+   - Check database `dreammapper` exists.
+   - Check `db.php` credentials.
+   - Check PHP version is reasonably current (PHP 8.x recommended).
+
+8. IMPORTANT CDN NOTE
+   The dashboard loads Cytoscape.js and Chart.js from jsDelivr/unpkg. Internet is needed for the graph/chart libraries on first page load.
+   The PHP smart-processing engine itself is local.
+
+9. GTU VIVA TALKING POINTS
+   Q: Why PHP?
+   A: PHP integrates naturally with Apache/XAMPP and provides simple server-side database processing.
+
+   Q: Why MySQL?
+   A: It is relational, lightweight and well supported by XAMPP/phpMyAdmin.
+
+   Q: How is the dream converted to nodes?
+   A: A local rule-based processing engine detects domain and timeframe and creates a structured milestone tree.
+
+   Q: How are graph relationships stored?
+   A: `nodes.parent_id` creates a self-referencing parent-child relationship.
+
+   Q: How is progress calculated?
+   A: Completed roadmap nodes divided by total roadmap nodes.
+
+   Q: What is the Success Probability Index?
+   A: A prototype heuristic combining completion and risk. It is not a scientific prediction.
+
+   Q: Can this become a real AI product?
+   A: Yes. `process_dream.php` can be replaced/extended with an LLM API while preserving the same database and graph contract.
+
+10. PRODUCTION SECURITY NOTE
+    This prototype intentionally prioritizes simplicity for a university demonstration.
+    Before public deployment add:
+    - Authentication and sessions
+    - CSRF tokens
+    - Rate limiting
+    - Input validation
+    - HTTPS
+    - Environment variables for database credentials
+    - Permission checks for every endpoint
